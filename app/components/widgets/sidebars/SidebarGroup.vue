@@ -81,7 +81,7 @@ const afterLeave = (el: Element) => {
     <Horizontal
       :bg="isActive || isExpand ? 'bg-secondary' : ''"
       padding="px-3 py-2"
-      gap="gap-2"
+      gap="gap-3"
       rounded="rounded-lg"
       class="group hover:text-hover-active"
       @click="expandRef = !expandRef"
@@ -101,8 +101,9 @@ const afterLeave = (el: Element) => {
       <IconWidget 
         :name="expandRef ? 'uil:angle-up' : 'uil:angle-down'" 
         :size="24" 
-        :color="isActive || isExpand ? 'text-font-active' : 'text-font-black'" 
-        iconClass="ml-auto group-hover:text-hover-active" 
+        :color="isActive || isExpand ? 'text-font-active' : 'text-font-black'"
+        class="ml-auto" 
+        iconClass="group-hover:text-hover-active" 
       />
     </Horizontal>
 

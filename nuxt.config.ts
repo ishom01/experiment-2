@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/i18n',
     '@nuxt/ui',
+    '@nuxt/image'
   ],
   i18n: {
     locales: [
@@ -22,5 +23,8 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ]
-  }
+  },
+  image: {
+    domains: ['mm.feb.uncen.ac.id'],
+  },
 })

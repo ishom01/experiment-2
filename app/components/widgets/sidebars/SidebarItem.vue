@@ -15,7 +15,7 @@ withDefaults(defineProps<{
   <Horizontal
     :bg="isActive ? 'bg-secondary' : ''"
     padding="px-3 py-2"
-    gap="gap-2"
+    gap="gap-3"
     rounded="rounded-lg"
     class="group hover:text-hover-active"
   >
