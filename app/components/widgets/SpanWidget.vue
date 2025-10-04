@@ -14,7 +14,7 @@ const pxSize = computed(() => typeof props.size === 'number' ? `${props.size}px`
 </script>
 
 <template>
-  <span :class="[pxSize, props.color, props.class]">
+  <span :class="[pxSize, color, props.class]">
     {{ value }}
   </span>
 </template>

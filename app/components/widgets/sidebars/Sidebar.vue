@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import Vertical from '~/components/groups/Vertical.vue';
+import SidebarGroup from './SidebarGroup.vue';
+import SidebarItem from './SidebarItem.vue';
+
 const menu: SidebarMenu = [
   { id: '1', icon: 'uil:home', label: 'Home', href: '/' },
   { id: '2', icon: 'uil:settings', label: 'Settings', href: '/settings' },
@@ -15,7 +19,7 @@ const menu: SidebarMenu = [
 </script>
 
 <template>
-  <GroupVertical padding="p-4" gap="gap-2" class="w-64">
+  <Vertical padding="p-4" gap="gap-2" class="w-64">
     <template v-for="item in menu" :key="item.id">
       <SidebarItem
         v-if="'href' in item"
@@ -28,6 +32,6 @@ const menu: SidebarMenu = [
         :isActive="false"
       />
     </template>
-  </GroupVertical>
+  </Vertical>
 </template>
 

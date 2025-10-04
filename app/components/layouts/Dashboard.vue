@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import Horizontal from '../groups/Horizontal.vue';
+import Sidebar from '../widgets/sidebars/Sidebar.vue';
+
 </script>
 <template>
-    <GroupHorizontal class="h-screen items-start">
-        <SidebarLayout/>
+    <Horizontal class="h-screen items-start">
+        <Sidebar/>
         <div class="flex flex-col flex-1 overflow-hidden">
-            <!-- Topbar -->
-            <Topbar />
-            
             <!-- Main content -->
             <main 
                 :class="[
@@ -19,5 +19,5 @@
                 </div>
             </main>
         </div>
-    </GroupHorizontal>
+    </Horizontal>
 </template>
