@@ -23,7 +23,7 @@ withDefaults(defineProps<{
       :name="item?.icon ? item?.icon : 'ci:dot-04-l'" 
       :size="20" 
       :color="isActive ? 'text-font-active' : 'text-font-black'" 
-      class="group-hover:text-hover-active" 
+      iconClass="group-hover:text-hover-active" 
     />
     <SpanWidget       
       :value="item?.label"

@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import Horizontal from '../groups/Horizontal.vue';
 import Sidebar from '../widgets/sidebars/Sidebar.vue';
+import Toolbar from '../widgets/toolbars/Toolbar.vue';
 
 </script>
 <template>
     <Horizontal class="h-screen items-start">
         <Sidebar/>
         <div class="flex flex-col flex-1 overflow-hidden">
+            <Toolbar title="Dashboard" />
             <!-- Main content -->
             <main 
                 :class="[

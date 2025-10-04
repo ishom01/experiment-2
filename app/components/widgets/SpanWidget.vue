@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   value: string,
-  size?: string,
+  size?: string | number,
   color?: string
   class?: string
 }>(), {

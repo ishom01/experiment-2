@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<{
   bg?: string
   color?: string
   class?: string
-  hoverGroup?: boolean
+  iconClass?: string
 }>(), {
   size: 24,
   padding: 'p-0',
@@ -30,6 +30,6 @@ const pxSize = computed(() =>
       props.class,
     ]"
   >
-    <Icon :name="name" :size="pxSize" :class="[color, props.class]" />
+    <Icon :name="name" :size="pxSize" :class="[color, props.iconClass]" />
   </span>
 </template>

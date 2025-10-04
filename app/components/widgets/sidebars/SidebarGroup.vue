@@ -35,7 +35,7 @@ const isExpand = computed(() => {
         :name="item?.icon ? item?.icon : 'ci:dot-04-l'" 
         :size="20" 
         :color="isActive || isExpand ? 'text-font-active' : 'text-font-black'" 
-        class="group-hover:text-hover-active" 
+        iconClass="group-hover:text-hover-active" 
       />
       <SpanWidget       
         :value="item?.label"
@@ -46,7 +46,7 @@ const isExpand = computed(() => {
         :name="expandRef ? 'uil:angle-up' : 'uil:angle-down'" 
         :size="24" 
         :color="isActive || isExpand ? 'text-font-active' : 'text-font-black'" 
-        class="ml-auto group-hover:text-hover-active" 
+        iconClass="ml-auto group-hover:text-hover-active" 
       />
     </Horizontal>
     <SidebarItem
