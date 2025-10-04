@@ -5,6 +5,7 @@ import Vertical from '~/components/groups/Vertical.vue';
 import IconWidget from '../IconWidget.vue';
 import SidebarItem from './SidebarItem.vue';
 import SpanWidget from '../SpanWidget.vue';
+
 const route = useRoute()
 const props = withDefaults(defineProps<{
   item: SidebarGroup,
@@ -18,6 +19,61 @@ const expandRef = ref(props.item.children?.some(child => route.path === child.hr
 const isExpand = computed(() => {
   return expandRef.value || props.item.children?.some(child => route.path === child.href)
 })
+
+// Smooth auto-height + fade transitions
+const beforeEnter = (el: Element) => {
+  const e = el as HTMLElement
+  e.style.height = '0px'
+  e.style.opacity = '0'
+}
+const enter = (el: Element, done: () => void) => {
+  const e = el as HTMLElement
+  e.style.transition = 'height 100ms cubic-bezier(0.25,1,0.5,1), opacity 100ms ease'
+  // compute first to ensure correct height
+  const target = e.scrollHeight
+  // next frame apply target
+  requestAnimationFrame(() => {
+    e.style.height = `${target}px`
+    e.style.opacity = '1'
+  })
+  const onEnd = (evt: TransitionEvent) => {
+    if (evt.propertyName === 'height') {
+      e.removeEventListener('transitionend', onEnd)
+      done()
+    }
+  }
+  e.addEventListener('transitionend', onEnd)
+}
+const afterEnter = (el: Element) => {
+  const e = el as HTMLElement
+  e.style.height = 'auto'
+  e.style.transition = ''
+}
+const beforeLeave = (el: Element) => {
+  const e = el as HTMLElement
+  e.style.height = `${e.scrollHeight}px`
+  e.style.opacity = '1'
+  e.style.transition = ''
+}
+const leave = (el: Element, done: () => void) => {
+  const e = el as HTMLElement
+  e.style.transition = 'height 100ms cubic-bezier(0.55,0,0.1,1), opacity 100ms ease'
+  requestAnimationFrame(() => {
+    e.style.height = '0px'
+    e.style.opacity = '0'
+  })
+  const onEnd = (evt: TransitionEvent) => {
+    if (evt.propertyName === 'height') {
+      e.removeEventListener('transitionend', onEnd)
+      done()
+    }
+  }
+  e.addEventListener('transitionend', onEnd)
+}
+const afterLeave = (el: Element) => {
+  const e = el as HTMLElement
+  e.style.transition = ''
+}
 </script>
 
 <template>
@@ -49,12 +105,26 @@ const isExpand = computed(() => {
         iconClass="ml-auto group-hover:text-hover-active" 
       />
     </Horizontal>
-    <SidebarItem
-        v-if="expandRef"
-        v-for="child in props.item.children"
-        :key="child.id"
-        :item="child"
-        :isActive="$route.path === child.href"
-      />
+
+    <Transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+    >
+      <div
+        v-show="expandRef"
+        class="overflow-hidden"
+      >
+        <SidebarItem
+          v-for="child in props.item.children"
+          :key="child.id"
+          :item="child"
+          :isActive="$route.path === child.href"
+        />
+      </div>
+    </Transition>
   </Vertical>
 </template>
